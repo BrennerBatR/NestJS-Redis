@@ -1,12 +1,21 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put } from '@nestjs/common';
+
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('/hello')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Put()
+  async putHello(
+    @Body() { name, key }: { name: string; key: string },
+  ): Promise<string> {
+    await this.appService.setCache(key, name);
+    return name;
+  }
+
+  @Get('/:key')
+  getHello(@Param('key') key: string): Promise<string> {
+    return this.appService.getCache(key);
   }
 }
