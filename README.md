@@ -12,3 +12,8 @@ $ docker run  nest-redis
 ```bash
 $ docker-compose up -d
 ```
+
+# Postman
+```bash
+https://www.getpostman.com/collections/b84a645843b8a00cab01
+```
